@@ -159,6 +159,12 @@ Base URL: `https://esimqr.link`
 |----------|--------|-------------|
 | `/api/web3/packages?q={country}` | GET | Search packages (works for both) |
 
+### Rate Limiting
+
+- **Limit**: 10 requests per minute per IP
+- **Response**: HTTP 429 with `Retry-After` header
+- Handle rate limits gracefully by respecting the `Retry-After` value
+
 ## Network Configuration
 
 ### Base Mainnet (Default)
@@ -168,7 +174,6 @@ Base URL: `https://esimqr.link`
 | Chain ID | 8453 |
 | CAIP-2 | eip155:8453 |
 | USDC Token | `0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913` |
-| Payment Wallet | `0x48e6a467852Fa29710AaaCDB275F85db4Fa420eB` |
 | USDC Decimals | 6 |
 
 ### Base Sepolia (Testnet)
@@ -178,8 +183,9 @@ Base URL: `https://esimqr.link`
 | Chain ID | 84532 |
 | CAIP-2 | eip155:84532 |
 | USDC Token | `0x036CbD53842c5426634e7929541eC2318f3dCF7e` |
-| Payment Wallet | `0xCA16Ea02C7BB4Cf00101A468627f9D54e8434Ce2` |
 | USDC Decimals | 6 |
+
+**Note**: Payment wallet addresses are returned dynamically by the API in quote and 402 responses. Do not hardcode payment addresses.
 
 ## Payment Schemes (x402)
 
@@ -232,7 +238,7 @@ GET /api/agent/quote?packageCode=US_1_7
   "planName": "United States 1GB 7Days",
   "usdcAmount": "1.18",
   "paymentDetails": {
-    "recipient": "0x48e6a467852Fa29710AaaCDB275F85db4Fa420eB",
+    "recipient": "<payment-address-from-api>",
     "chainId": 8453,
     "network": "eip155:8453"
   }
@@ -249,7 +255,7 @@ GET /api/agent-testnet/quote?packageCode=US_1_7
   "planName": "United States 1GB 7Days",
   "usdcAmount": "1.18",
   "paymentDetails": {
-    "recipient": "0xCA16Ea02C7BB4Cf00101A468627f9D54e8434Ce2",
+    "recipient": "<payment-address-from-api>",
     "chainId": 84532,
     "network": "eip155:84532"
   },
@@ -266,10 +272,12 @@ Body: {"packageCode": "US_1_7"}
   "x402Version": 2,
   "accepts": [
     {"scheme": "exact", ...},
-    {"scheme": "transfer", "amount": "1180000", "payTo": "0x48e6...", "extra": {"nonce": "abc123"}}
+    {"scheme": "transfer", "amount": "1180000", "payTo": "<payment-address-from-api>", "extra": {"nonce": "abc123"}}
   ]
 }
 ```
+
+**Important**: Always use the `payTo` address from the 402 response. Never hardcode payment addresses.
 
 ### Purchase Success
 ```json

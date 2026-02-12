@@ -10,13 +10,13 @@ from typing import Optional, List, Literal
 BASE_URL = "https://esimqr.link"
 
 # Network Configuration
+# Note: Payment wallet addresses are returned dynamically by the API - do not hardcode them
 NETWORK_CONFIG = {
     "mainnet": {
         "name": "Base Mainnet",
         "chain_id": 8453,
         "caip2": "eip155:8453",
         "usdc_token": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
-        "payment_wallet": "0x48e6a467852Fa29710AaaCDB275F85db4Fa420eB",
         "api_prefix": "/api/agent",  # /api/agent/quote, /api/agent/purchase, etc.
         "real_esim": True,
     },
@@ -25,7 +25,6 @@ NETWORK_CONFIG = {
         "chain_id": 84532,
         "caip2": "eip155:84532",
         "usdc_token": "0x036CbD53842c5426634e7929541eC2318f3dCF7e",
-        "payment_wallet": "0xCA16Ea02C7BB4Cf00101A468627f9D54e8434Ce2",
         "api_prefix": "/api/agent-testnet",  # /api/agent-testnet/quote, etc.
         "real_esim": False,
     }
@@ -377,9 +376,9 @@ if __name__ == "__main__":
         print(f"  Chain ID: {info['chain_id']}")
         print(f"  CAIP-2: {info['caip2']}")
         print(f"  USDC Token: {info['usdc_token']}")
-        print(f"  Payment Wallet: {info['payment_wallet']}")
         print(f"  API Prefix: {info['api_prefix']}")
         print(f"  Real eSIM: {info['real_esim']}")
+        print(f"  Payment Wallet: (returned by API in quote/402 response)")
 
     else:
         print(f"Unknown command: {command}")

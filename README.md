@@ -33,6 +33,8 @@ Base URL: `https://esimqr.link`
 | `GET /api/agent/quote?packageCode={code}` | Get price |
 | `POST /api/agent/purchase` | Purchase (x402 flow) |
 
+**Rate Limit**: 10 requests/minute per IP. Handle 429 responses with `Retry-After` header.
+
 ## License
 
 MIT
