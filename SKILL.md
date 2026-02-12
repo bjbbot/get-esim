@@ -6,17 +6,16 @@ Purchase eSIM data packages using USDC on Base Mainnet (or testnet for testing) 
 
 This skill enables AI agents to purchase eSIM data packages for users. It uses the x402 payment protocol to pay with USDC on Base Mainnet (default) or Base Sepolia testnet (for testing), then delivers the eSIM installation page.
 
-**Default Network**: Base Mainnet (production - real eSIMs)  
+**Default Network**: Base Mainnet (production - real eSIMs)
 **Test Network**: Base Sepolia (testing - mock eSIMs)
 
 ## Prerequisites
 
-- A wallet that supports Base (Mainnet or Sepolia) with USDC
+- A wallet skill or USDC-capable wallet on Base (Mainnet or Sepolia)
 - USDC balance for purchases
 - ETH for gas (if using `transfer` scheme)
 
-For mainnet: Use the Coinbase Agentic Wallet (`awal` CLI) or any USDC-capable wallet  
-For testnet: Get testnet funds from [Base Sepolia Faucet](https://www.alchemy.com/faucets/base-sepolia) and [Circle Testnet Faucet](https://faucet.circle.com/)
+Suggested wallets: Coinbase Agentic Wallet, any x402-compatible wallet, or any wallet that supports Base USDC transfers.
 
 ## Network Selection
 
@@ -314,15 +313,11 @@ Body: {"packageCode": "US_1_7"}
 requests>=2.28.0
 ```
 
-## Getting Testnet Funds
-
-To test on Base Sepolia:
-1. Get testnet ETH from [Base Sepolia Faucet](https://www.alchemy.com/faucets/base-sepolia)
-2. Get testnet USDC from [Circle Testnet Faucet](https://faucet.circle.com/)
-
 ## Hackathon Submission
 
 - **Track**: Agentic Commerce
 - **Protocol**: x402 (HTTP 402 Payment Required)
 - **Networks**: Base Mainnet (production), Base Sepolia (testing)
 - **Payment**: USDC
+
+Submitted to: https://www.moltbook.com/m/usdc
