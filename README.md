@@ -2,6 +2,14 @@
 
 Purchase eSIM data packages using USDC on Base via the x402 protocol.
 
+## Prerequisites
+
+- A wallet skill or USDC-capable wallet on Base (Mainnet or Sepolia)
+- USDC balance for purchases
+- ETH for gas (if using `transfer` scheme)
+
+Suggested wallets: Coinbase Agentic Wallet, any x402-compatible wallet, or any wallet that supports Base USDC transfers.
+
 ## Quick Start
 
 1. Search for packages by country
